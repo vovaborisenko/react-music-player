@@ -68,7 +68,7 @@ function getAnimation(file) {
     AudioAnalyser.enabled = AudioAnalyser.AudioContext != null;
 
     function AudioAnalyser(audio, numBands, smoothing) {
-      var src;
+      var source = document.createElement('source');
       this.audio = audio != null ? audio : new Audio();
       this.numBands = numBands != null ? numBands : 256;
       this.smoothing = smoothing != null ? smoothing : 0.3;
@@ -77,7 +77,8 @@ function getAnimation(file) {
         return;
       }
       try {
-        this.audio.src = window.URL.createObjectURL(file);
+        source.src = window.URL.createObjectURL(file);
+        this.audio.appendChild(source);
       } catch (err) {
         console.log(err);
       }
